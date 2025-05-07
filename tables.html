@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- Webpage based on template from: https://github.com/startbootstrap/startbootstrap-sb-admin-2 -->
+
 <head>
 
     <meta charset="utf-8">
@@ -169,7 +171,25 @@
                 // Create table header
                 tableHTML += '<thead><tr>';
                 for (const key in data[0]) {
-                    tableHTML += `<th>${key}</th>`;
+                    if (key == "amiiboSeries"){
+                        tableHTML += `<th>Amiibo Series</th>`;
+                    }else if(key == "character"){
+                        tableHTML += `<th>Character</th>`;
+                    }else if(key == "gameSeries"){
+                        tableHTML += `<th>Game Series</th>`;
+                    }else if(key == "image"){
+                        tableHTML += `<th>Preview</th>`;
+                    }else if(key == "name"){
+                        tableHTML += `<th>Name</th>`;
+                    }else if(key == "release"){
+                        tableHTML += `<th>Release</th>`;
+                    }else if(key == "type"){
+                        tableHTML += `<th>Type</th>`;
+                    }
+                    else if(key != 'tail' && key != 'head'){
+                        tableHTML += `<th>${key}</th>`;
+                    }
+
                 }
                 tableHTML += '</tr></thead>';
 
@@ -180,8 +200,25 @@
                     for (const key in item) {
                         if(key == "image"){
                             tableHTML += `<td align="center"><img src=${item[key]} height="100px"></td>`;
+                        } else if(key == "release"){
+                            tableHTML += `<td width="15%">`
+                            if(!!item[key].au){
+                                tableHTML += `AU:${item[key].au}<br>`
+                            }
+                            if(!!item[key].eu){
+                                tableHTML += `EU:${item[key].eu}<br>`
+                            }
+                            if(!!item[key].jp){
+                                tableHTML += `JP:${item[key].jp}<br>`
+                            }
+                            if(!!item[key].na){
+                                tableHTML += `US:${item[key].na}<br>`
+                            }
+                            tableHTML +=`</td>`;
                         }else{
-                            tableHTML += `<td>${item[key]}</td>`;
+                            if(key != "tail"&& key != 'head'){
+                                tableHTML += `<td>${item[key]}</td>`;
+                            }
                         }
                     }
                     tableHTML += '</tr>';
