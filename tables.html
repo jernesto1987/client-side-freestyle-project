@@ -191,6 +191,7 @@
                 return tableHTML;
             }
 
+            //Dynamic Table creation using JQuery
             $(document).ready(async function tableLoad() {
                 var amiiboTable = document.getElementById("dataTable")
                 amiiboTable.innerHTML = await createTable(data.amiibo)
